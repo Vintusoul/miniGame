@@ -1,6 +1,6 @@
 /** @type {HTMLCanvasElement} */
 // tell vscode this is a canvas project and will get canvas suggestions
-const canvas = document.getElementById("canvas4");
+const canvas = document.getElementById("canvas5");
 const ctx = canvas.getContext("2d");
 CANVAS_WIDTH = canvas.width = 500;
 CANVAS_HEIGHT = canvas.height = 1000;
@@ -11,23 +11,29 @@ let gameframe = 0;
 class Enemy {
   constructor() {
     this.image = new Image();
-    this.image.src = "enemy2.png";
+    this.image.src = "enemy3.png";
     this.speed = Math.random() * 4 + 1;
-    this.spriteWidth = 266;
-    this.spriteHeight = 188;
+    this.spriteWidth = 218;
+    this.spriteHeight = 177;
     this.height = this.spriteHeight / 2.5;
     this.width = this.spriteWidth / 2.5;
     this.x = Math.random() * (canvas.width - this.width);
     this.y = Math.random() * (canvas.height - this.height);
     this.frame = 0;
     this.flapSpeed = Math.floor(Math.random() * 3 + 1);
-    this.angle = Math.random() * 2;
-    this.angleSpeed = Math.random() * 0.2;
-    this.curve = Math.random() * 7;
+    this.angle = Math.random() * 100;
+    this.angleSpeed = Math.random() * 1.7 + 0.5;
   }
   update() {
-    this.x -= this.speed;
-    this.y += this.curve * Math.sin(this.angle);
+    // If you struggle with sin and cos you can look at the example image in this folder ./sinAndCos.png
+    this.x =
+      (canvas.width / 2) * Math.cos((this.angle * Math.PI) / 200) +
+      canvas.width / 2 -
+      this.width / 2;
+    this.y =
+      (canvas.height / 2) * Math.sin((this.angle * Math.PI) / 300) +
+      canvas.height / 2 -
+      this.height / 2;
     this.angle += this.angleSpeed;
     // animate
     if (this.x + this.width < 0) this.x = canvas.width;
