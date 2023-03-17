@@ -11,24 +11,23 @@ let gameframe = 0;
 class Enemy {
   constructor() {
     this.image = new Image();
-    this.image.src = "enemy3.png";
+    this.image.src = "enemy4.png";
     this.speed = Math.random() * 4 + 1;
-    this.spriteWidth = 218;
-    this.spriteHeight = 177;
+    this.spriteWidth = 213;
+    this.spriteHeight = 213;
     this.height = this.spriteHeight / 2.5;
     this.width = this.spriteWidth / 2.5;
-
     this.x = Math.random() * (canvas.width - this.width);
     this.y = Math.random() * (canvas.height - this.height);
-
-    this.newX = Math.random() * (canvas.width - this.width);
-    this.newY = Math.random() * (canvas.height - this.height);
+    this.newX = Math.random() * canvas.width;
+    this.newY = Math.random() * canvas.height;
     this.frame = 0;
     this.flapSpeed = Math.floor(Math.random() * 3 + 1);
+    this.interval = Math.floor(Math.random() * 200 + 50);
   }
   update() {
     // animate
-    if (gameframe % 30 === 0) {
+    if (gameframe % this.interval === 0) {
       this.newX = Math.random() * (canvas.width - this.width);
       this.newY = Math.random() * (canvas.height - this.height);
     }
@@ -36,6 +35,10 @@ class Enemy {
     let dx = this.x - this.newX;
     // distance on vertical y axis
     let dy = this.y - this.newY;
+
+    this.x -= dx / 70;
+    this.y -= dy / 20;
+
     if (this.x + this.width < 0) this.x = canvas.width;
 
     if (gameframe % this.flapSpeed === 0) {
