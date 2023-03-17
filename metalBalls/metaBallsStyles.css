@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+}
+
+canvas {
+  display: block;
+  background: black;
+  /* this gives the liquid effect */
+  filter: blur(10px) contrast(40);
+}
